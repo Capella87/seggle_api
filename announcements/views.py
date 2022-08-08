@@ -26,6 +26,21 @@ class AnnouncementDetailView(APIView):
         target.delete()
         return Response(status=status.HTTP_200_OK)
 
+class AnnouncementEditor(APIView):
+    #announcement 수정
+    def put(self, request, pk):
+        serializer = AnnouncementSerializer()###
+
+        if pk.get('user_id') is None:
+            return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            user_id = pk.get('user_id')
+            update_user_serializer = serializer(user_id, data=request.data)###user_id가 아닌것같습니다
+            if update_user_serializer.is_valid():
+                update_user_serializer.save()
+                return Response(update_user_serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
 class AnnouncementCheckView(APIView):
     # 00-15 announcement_id인 announcement 수정 (important, visible)
     # 관리자만 접근 가능
