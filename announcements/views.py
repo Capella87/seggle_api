@@ -41,3 +41,23 @@ class AnnouncementEditor(APIView):
                 return Response(update_user_serializer.data, status=status.HTTP_200_OK)
             else:
                 return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+class AnnouncementCheckView(APIView):
+    # 00-15 announcement_id인 announcement 수정 (important, visible)
+    # 관리자만 접근 가능
+    authentication_classes = [authentication.SessionAuthentication, authentication.TokenAuthentication, ]
+    permission_classes = [permissions.IsAdminUser, ]
+
+    def put(self, request, pk):
+        query = get_object_or_404(Announcement, pk=pk)
+        data = request.data
+        obj = {
+            "title": query.title,
+            "description": query.description,
+            "important" : data["is_important"],
+            "visible" : data["is_visible"]
+        }
+        serializer = AnnouncementSerializer(query, data=obj)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
