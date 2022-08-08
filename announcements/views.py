@@ -36,6 +36,8 @@ class AnnouncementCheckView(APIView):
         query = get_object_or_404(Announcement, pk=pk)
         data = request.data
         obj = {
+            "title": query.title,
+            "description": query.description,
             "important" : data["is_important"],
             "visible" : data["is_visible"]
         }
