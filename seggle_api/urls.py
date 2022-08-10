@@ -17,19 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import permissions
 
-import announcements
-from announcements import views, models, urls
-
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
 urlpatterns = [
     path('api/', include('django.contrib.auth.urls')),
+    path('api/account/', include('account.urls')),
+    path('api/admin/user/', include('account.urls_admin')),
+    path('api/admin/announcements/', include('announcements.urls')),
     path('api/admin/', admin.site.urls),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/announcements/', include(announcements.urls)),
     path('api/api-auth/', include('rest_framework.urls')),
 ]
