@@ -34,6 +34,16 @@ class DetailedUserInfoView(APIView):
 
         return Response(serializer.data)
 
+    # Kick the user
+    def delete(self, request, username):
+        violator = get_object_or_404(SeggleUser, username=username)
+
+        if violator.is_active is False:
+            return Response({'error': 'The user ' + violator.username + ' is already kicked or deleted.'})
+        violator.is_active = False
+        violator.save()
+        return Response({'success': 'The user ' + violator.username + ' is successfully kicked.'},
+                        status=status.HTTP_200_OK)
 # Views for ordinary members
 
 class SignUpView(APIView):
