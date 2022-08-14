@@ -23,5 +23,6 @@ urlpatterns = [
     path('api/admin/user/', include('account.urls_admin')),
     path('api/admin/announcements/', include('announcements.urls_admin')),
     path('api/admin/', admin.site.urls),
+    path('api/announcements/', include('announcements.urls')),
     path('api/api-auth/', include('rest_framework.urls')),
 ]
