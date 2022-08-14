@@ -98,7 +98,7 @@ class AnnouncementCheckView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-Class AnnouncementView(APIView):
+class AnnouncementView(APIView):
     authentication_classes = [authentication.SessionAuthentication, authentication.TokenAuthentication, ]
     permission_classes = [permissions.IsAdminUser, ]
 
@@ -118,4 +118,4 @@ Class AnnouncementView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

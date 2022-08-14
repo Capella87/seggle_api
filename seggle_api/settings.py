@@ -81,9 +81,6 @@ WSGI_APPLICATION = 'seggle_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'root',
-        'USER': 'root',
-        'PASSWORD': 'stem38',
         'OPTIONS': {
             'read_default_file': './dbconnection.cnf',
             'init_command': 'SET default_storage_engine=INNODB',
