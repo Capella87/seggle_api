@@ -98,24 +98,12 @@ class AnnouncementCheckView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# For public users
 class AnnouncementView(APIView):
-    authentication_classes = [authentication.SessionAuthentication, authentication.TokenAuthentication, ]
-    permission_classes = [permissions.IsAdminUser, ]
+    permission_classes = [permissions.IsAuthenticated, ]
 
+    def get(self, request):
+        target = Announcement.objects.filter(is_visible=True)
+        serializer = AnnouncementSerializer(target, many=True)
 
-    def post(self, request):
-        data = request.data
-        announcement = {
-            "title": data["title"],
-            "context": data["context"],
-            "created_user": request.user,
-            "important": data["important"],
-            "visible": data["visible"]
-
-        }
-
-        serializer = AnnouncementSerializer(data=announcement)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=status.HTTP_200_OK)
