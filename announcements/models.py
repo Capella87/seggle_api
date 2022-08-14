@@ -9,7 +9,7 @@ class Announcement(models.Model):
     title = models.TextField(null=False, default='')
     description = models.TextField()
     created_time = models.DateTimeField(null=False, auto_now_add=True, editable=False)
-    last_modified = models.DateTimeField(null=False, auto_now_add=True, auto_now=False)
+    last_modified = models.DateTimeField(null=False, auto_now=True)
     is_important = models.BooleanField(null=False, default=False)
     is_visible = models.BooleanField(null=False, default=True)
 
