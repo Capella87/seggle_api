@@ -76,9 +76,9 @@ class AnnouncementEditor(APIView):
                 return Response(update_user_serializer.data, status=status.HTTP_200_OK)
             else:
                 return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+
 class AnnouncementCheckView(APIView):
     # 00-15 announcement_id인 announcement 수정 (important, visible)
-    # 관리자만 접근 가능
     permission_classes = [permissions.IsAdminUser, ]
 
     def put(self, request, pk):
