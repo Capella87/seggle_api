@@ -3,7 +3,7 @@
 ## 설치하기
 
 ## 설치 후 마이그레이션
-1. 먼저 admin, auth, contenttypes, sessions를 마이그레이션을 한다.
+1. 먼저 admin, auth, contenttypes, sessions, 를 마이그레이션을 한다.
 ```commandline
 python manage.py migrate [대상]
 ```
@@ -14,7 +14,7 @@ python manage.py migrate admin --fake
 python manage.py migrate admin
 ```
 
-2. account 앱을 마이그레이션한다.
+2. account, announcements 앱을 마이그레이션한다.
 
 ```commandline
 python manage.py makemigrations account
