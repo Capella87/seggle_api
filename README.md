@@ -11,7 +11,7 @@ Djangogram과 유사합니다.
 ### Required pip packages
 * Django (>= 4.0)
 * djangorestframework
-* djangorestgramework-simplejwt
+* djangorestframework-simplejwt
 * mysqlclient
 * Pillow
 
