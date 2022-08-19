@@ -44,10 +44,10 @@ class AnnouncementDetailView(APIView):
         data = request.data
 
         obje = {
-            'title': data['title'],
-            'description': data['description'],
-            'is_visible': data['is_visible'],
-            'is_important': data['is_important'],
+            'title': data.get('title'),
+            'description': data.get('description'),
+            'is_visible': data.get('is_visible'),
+            'is_important': data.get('is_important'),
             'writer': announcement.writer
         }
         serializer = AnnouncementSerializer(announcement, data=obje)
@@ -87,8 +87,8 @@ class AnnouncementCheckView(APIView):
         obj = {
             "title": query.title,
             "description": query.description,
-            "is_important": data["is_important"],
-            "is_visible": data["is_visible"],
+            "is_important": data.get('is_important'),
+            "is_visible": data.get('is_visible'),
             "writer": query.writer,
         }
         serializer = AnnouncementSerializer(query, data=obj)
